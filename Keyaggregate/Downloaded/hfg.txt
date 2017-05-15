@@ -1,0 +1,28 @@
+
+        try{
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password= request.getParameter("pass");
+       
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/example","root","password");
+        
+            Statement st=con.createStatement();
+            
+            int i=st.executeUpdate("insert into userdetails (username,email,password) values ('"+name+"','"+email+"','"+password+"')");
+     
+            
+            if(i!=0)
+            {
+                response.sendRedirect("success.jsp");
+            }
+            else
+            {
+                response.sendRedirect("error.jsp");
+            }
+        
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+    }
